@@ -1,0 +1,26 @@
+<%= image_tag @avatar %>
+<h1><%= @name %></h1>
+<p><%= @account_id %></p>
+<%= link_to 'Steam profile', @steam_profile %>
+<p><%= @rank %></p>
+<p><%= @wl %></p>
+
+<table>
+    <tr>
+        <th>Hero</th>
+        <th>Team</th>
+        <th>Result</th>
+        <th>Duration</th>
+        <th>K/D/A</th>
+    </tr>
+<% @recent_matches_arr.each do |match| %>
+    <tr>
+        <td><%= match[:hero] %></td>
+        <td><%= match[:team] %></td>
+        <td><%= match[:result] %></td>
+        <td><%= match[:gametime] %></td>
+        <td><%= match[:kda] %></td>
+    </tr>
+<% end %>
+</table>
+<% console %>
