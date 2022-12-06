@@ -31,7 +31,7 @@ class OpenDotaApi::Client
         @_client ||= Faraday.new(ENV['BASE_URL']) do |client|
             client.request :url_encoded
             client.adapter Faraday.default_adapter
-          end
+        end
     end
 
     def request(http_method:, endpoint:, params: {})

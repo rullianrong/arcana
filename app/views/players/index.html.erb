@@ -1,0 +1,9 @@
+<div class="search-bar d-flex justify-content-center p-0 pt-3">
+    <%= form_with url: "/players/show", method: :get do |form| %>
+    <p>Search player stats and recent matches in one click</p>
+    <div class="input-group mb-3">
+        <%= form.number_field :player_id, class: "form-control", placeholder: "Player ID" %>
+        <%= form.submit "Search", class: "btn btn-dark" %>
+    </div>
+    <% end %>
+</div>

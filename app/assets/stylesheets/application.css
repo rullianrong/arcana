@@ -13,3 +13,41 @@
  *= require_tree .
  *= require_self
  */
+
+body,
+html {
+  height: 100%;
+  background: url("dota2-bg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: aliceblue;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.search-bar {
+  margin-top: 10px;
+  padding-right: 160px;
+}
+
+.card {
+  width: 275px;
+  background-color: #212529;
+  height: 500px;
+}
+
+.table {
+  width: 600px;
+}

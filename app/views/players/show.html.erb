@@ -1,26 +1,43 @@
-<%= image_tag @avatar %>
-<h1><%= @name %></h1>
-<p><%= @account_id %></p>
-<%= link_to 'Steam profile', @steam_profile %>
-<p><%= @rank %></p>
-<p><%= @wl %></p>
+<div class="search-bar d-flex justify-content-end">
+    <%= form_with url: "/players/show", method: :get do |form| %>
+    <div class="input-group mb-3">
+        <%= form.number_field :player_id, class: "form-control", placeholder: "Player ID" %>
+        <%= form.submit "Search", class: "btn btn-dark" %>
+    </div>
+    <% end %>
+</div>
 
-<table>
-    <tr>
-        <th>Hero</th>
-        <th>Team</th>
-        <th>Result</th>
-        <th>Duration</th>
-        <th>K/D/A</th>
-    </tr>
-<% @recent_matches_arr.each do |match| %>
-    <tr>
-        <td><%= match[:hero] %></td>
-        <td><%= match[:team] %></td>
-        <td><%= match[:result] %></td>
-        <td><%= match[:gametime] %></td>
-        <td><%= match[:kda] %></td>
-    </tr>
-<% end %>
-</table>
-<% console %>
+<div class="container d-flex justify-content-center gap-3 ">
+    <div class="card">
+        <%= image_tag @avatar, class: "card-img-top img-thumbnail" %>
+        <div class="card-body">
+            <h1 class="card-title"><%= @name %></h1>
+            <p class="card-text"><%= @account_id %></p>
+            <p class="card-text"><%= @rank %></p>
+            <p class="card-text"><%= @wl %></p>
+            <p class="card-text"><%= @winrate %></p>
+            <div class="d-flex justify-content-center">
+                <%= link_to 'Steam profile', @steam_profile, class: "btn btn-dark" %>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-dark table-striped">
+        <tr>
+            <th scope="col">Hero</th>
+            <th scope="col">Team</th>
+            <th scope="col">Result</th>
+            <th scope="col">Duration</th>
+            <th scope="col">K / D / A</th>
+        </tr>
+    <% @recent_matches_arr.each do |match| %>
+        <tr>
+            <td><%= match[:hero] %></td>
+            <td><%= match[:team] %></td>
+            <td><%= match[:result] %></td>
+            <td><%= match[:gametime] %></td>
+            <td><%= match[:kills] %> / <%= match[:deaths] %> / <%= match[:assists] %></td>
+        </tr>
+    <% end %>
+    </table>
+</div>

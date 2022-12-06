@@ -1,16 +1,19 @@
 class PlayersController < ApplicationController
+    def index
+    end
+
     def show
         # Initiate client, player infos and game data
         client = OpenDotaApi::Client.new
-        data = client.player_info(397653417)
-        win_lose_data = client.win_lose_data(397653417)
-        recent_matches = client.recent_matches(397653417)
+        data = client.player_info(params[:player_id])
+        win_lose_data = client.win_lose_data(params[:player_id])
+        recent_matches = client.recent_matches(params[:player_id])
         heroes_hash = client.heroes
 
         # Set player variables
         @account_id = data['profile']['account_id']
         @name = data['profile']['personaname']
-        @avatar = data['profile']['avatarmedium']
+        @avatar = data['profile']['avatarfull']
         @steam_profile = data['profile']['profileurl']
 
         # Gets player rank code (integer)
@@ -46,14 +49,17 @@ class PlayersController < ApplicationController
                 result: result,
                 gametime: seconds_to_hms(match['duration']),
                 hero: heroes_hash["#{hero_id}"]['localized_name'],
-                kda: "#{match['kills']}/#{match['deaths']}/#{match['assists']}"
+                kills: "#{match['kills']}",
+                deaths: "#{match['deaths']}",
+                assists: "#{match['assists']}"
             }
         end
 
          # Calculate player's 20 recent matches winrate
          winrate = ((recent_wins.to_f / 20 ) * 100).round(2)
  
-         @wl = "Total Win/Lose: #{win_lose_data['win']}/#{win_lose_data['lose']}, Last 20 matches winrate = #{winrate}%"
+         @wl = "Total Win/Lose: #{win_lose_data['win']}/#{win_lose_data['lose']}"
+         @winrate = "Last 20 matches winrate = #{winrate}%"
     end
 
     private
